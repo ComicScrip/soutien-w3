@@ -1,0 +1,3 @@
+mutation DeleteWilder($deleteWilderId: Float!) {
+  deleteWilder(id: $deleteWilderId)
+}
