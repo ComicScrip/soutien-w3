@@ -17,179 +17,113 @@ export type Scalars = {
 
 export type Mutation = {
   __typename?: 'Mutation';
-  createWilder: Wilder;
-  deleteWilder: Scalars['Boolean'];
+  addProduct: Product;
 };
 
 
-export type MutationCreateWilderArgs = {
-  data: WilderInput;
+export type MutationAddProductArgs = {
+  product: ProductInput;
 };
 
+export type Product = {
+  __typename?: 'Product';
+  id: Scalars['Int'];
+  image: Scalars['String'];
+  name: Scalars['String'];
+  price: Scalars['Float'];
+};
 
-export type MutationDeleteWilderArgs = {
-  id: Scalars['Float'];
+export type ProductInput = {
+  image: Scalars['String'];
+  name: Scalars['String'];
+  price: Scalars['Float'];
 };
 
 export type Query = {
   __typename?: 'Query';
-  wilder: Wilder;
-  wilders: Array<Wilder>;
+  products: Array<Product>;
 };
 
-
-export type QueryWilderArgs = {
-  id: Scalars['Float'];
-};
-
-export type SkillOfWilder = {
-  __typename?: 'SkillOfWilder';
-  id: Scalars['Float'];
-  name: Scalars['String'];
-  votes: Scalars['Float'];
-};
-
-export type Wilder = {
-  __typename?: 'Wilder';
-  avatarUrl?: Maybe<Scalars['String']>;
-  bio?: Maybe<Scalars['String']>;
-  city?: Maybe<Scalars['String']>;
-  id: Scalars['Float'];
-  name: Scalars['String'];
-  skills: Array<SkillOfWilder>;
-};
-
-export type WilderInput = {
-  avatarUrl?: InputMaybe<Scalars['String']>;
-  bio?: InputMaybe<Scalars['String']>;
-  city?: InputMaybe<Scalars['String']>;
-  name: Scalars['String'];
-};
-
-export type CreateWilderMutationVariables = Exact<{
-  data: WilderInput;
+export type AddProductMutationVariables = Exact<{
+  product: ProductInput;
 }>;
 
 
-export type CreateWilderMutation = { __typename?: 'Mutation', createWilder: { __typename?: 'Wilder', id: number } };
+export type AddProductMutation = { __typename?: 'Mutation', addProduct: { __typename?: 'Product', id: number } };
 
-export type DeleteWilderMutationVariables = Exact<{
-  deleteWilderId: Scalars['Float'];
-}>;
+export type ProductsQueryVariables = Exact<{ [key: string]: never; }>;
 
 
-export type DeleteWilderMutation = { __typename?: 'Mutation', deleteWilder: boolean };
-
-export type WildersQueryVariables = Exact<{ [key: string]: never; }>;
+export type ProductsQuery = { __typename?: 'Query', products: Array<{ __typename?: 'Product', id: number, name: string, image: string, price: number }> };
 
 
-export type WildersQuery = { __typename?: 'Query', wilders: Array<{ __typename?: 'Wilder', id: number, name: string, bio?: string | null, city?: string | null, avatarUrl?: string | null, skills: Array<{ __typename?: 'SkillOfWilder', id: number, name: string, votes: number }> }> };
-
-
-export const CreateWilderDocument = gql`
-    mutation CreateWilder($data: WilderInput!) {
-  createWilder(data: $data) {
+export const AddProductDocument = gql`
+    mutation AddProduct($product: ProductInput!) {
+  addProduct(product: $product) {
     id
   }
 }
     `;
-export type CreateWilderMutationFn = Apollo.MutationFunction<CreateWilderMutation, CreateWilderMutationVariables>;
+export type AddProductMutationFn = Apollo.MutationFunction<AddProductMutation, AddProductMutationVariables>;
 
 /**
- * __useCreateWilderMutation__
+ * __useAddProductMutation__
  *
- * To run a mutation, you first call `useCreateWilderMutation` within a React component and pass it any options that fit your needs.
- * When your component renders, `useCreateWilderMutation` returns a tuple that includes:
+ * To run a mutation, you first call `useAddProductMutation` within a React component and pass it any options that fit your needs.
+ * When your component renders, `useAddProductMutation` returns a tuple that includes:
  * - A mutate function that you can call at any time to execute the mutation
  * - An object with fields that represent the current status of the mutation's execution
  *
  * @param baseOptions options that will be passed into the mutation, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options-2;
  *
  * @example
- * const [createWilderMutation, { data, loading, error }] = useCreateWilderMutation({
+ * const [addProductMutation, { data, loading, error }] = useAddProductMutation({
  *   variables: {
- *      data: // value for 'data'
+ *      product: // value for 'product'
  *   },
  * });
  */
-export function useCreateWilderMutation(baseOptions?: Apollo.MutationHookOptions<CreateWilderMutation, CreateWilderMutationVariables>) {
+export function useAddProductMutation(baseOptions?: Apollo.MutationHookOptions<AddProductMutation, AddProductMutationVariables>) {
         const options = {...defaultOptions, ...baseOptions}
-        return Apollo.useMutation<CreateWilderMutation, CreateWilderMutationVariables>(CreateWilderDocument, options);
+        return Apollo.useMutation<AddProductMutation, AddProductMutationVariables>(AddProductDocument, options);
       }
-export type CreateWilderMutationHookResult = ReturnType<typeof useCreateWilderMutation>;
-export type CreateWilderMutationResult = Apollo.MutationResult<CreateWilderMutation>;
-export type CreateWilderMutationOptions = Apollo.BaseMutationOptions<CreateWilderMutation, CreateWilderMutationVariables>;
-export const DeleteWilderDocument = gql`
-    mutation DeleteWilder($deleteWilderId: Float!) {
-  deleteWilder(id: $deleteWilderId)
-}
-    `;
-export type DeleteWilderMutationFn = Apollo.MutationFunction<DeleteWilderMutation, DeleteWilderMutationVariables>;
-
-/**
- * __useDeleteWilderMutation__
- *
- * To run a mutation, you first call `useDeleteWilderMutation` within a React component and pass it any options that fit your needs.
- * When your component renders, `useDeleteWilderMutation` returns a tuple that includes:
- * - A mutate function that you can call at any time to execute the mutation
- * - An object with fields that represent the current status of the mutation's execution
- *
- * @param baseOptions options that will be passed into the mutation, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options-2;
- *
- * @example
- * const [deleteWilderMutation, { data, loading, error }] = useDeleteWilderMutation({
- *   variables: {
- *      deleteWilderId: // value for 'deleteWilderId'
- *   },
- * });
- */
-export function useDeleteWilderMutation(baseOptions?: Apollo.MutationHookOptions<DeleteWilderMutation, DeleteWilderMutationVariables>) {
-        const options = {...defaultOptions, ...baseOptions}
-        return Apollo.useMutation<DeleteWilderMutation, DeleteWilderMutationVariables>(DeleteWilderDocument, options);
-      }
-export type DeleteWilderMutationHookResult = ReturnType<typeof useDeleteWilderMutation>;
-export type DeleteWilderMutationResult = Apollo.MutationResult<DeleteWilderMutation>;
-export type DeleteWilderMutationOptions = Apollo.BaseMutationOptions<DeleteWilderMutation, DeleteWilderMutationVariables>;
-export const WildersDocument = gql`
-    query Wilders {
-  wilders {
+export type AddProductMutationHookResult = ReturnType<typeof useAddProductMutation>;
+export type AddProductMutationResult = Apollo.MutationResult<AddProductMutation>;
+export type AddProductMutationOptions = Apollo.BaseMutationOptions<AddProductMutation, AddProductMutationVariables>;
+export const ProductsDocument = gql`
+    query products {
+  products {
     id
     name
-    bio
-    city
-    avatarUrl
-    skills {
-      id
-      name
-      votes
-    }
+    image
+    price
   }
 }
     `;
 
 /**
- * __useWildersQuery__
+ * __useProductsQuery__
  *
- * To run a query within a React component, call `useWildersQuery` and pass it any options that fit your needs.
- * When your component renders, `useWildersQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * To run a query within a React component, call `useProductsQuery` and pass it any options that fit your needs.
+ * When your component renders, `useProductsQuery` returns an object from Apollo Client that contains loading, error, and data properties
  * you can use to render your UI.
  *
  * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
  *
  * @example
- * const { data, loading, error } = useWildersQuery({
+ * const { data, loading, error } = useProductsQuery({
  *   variables: {
  *   },
  * });
  */
-export function useWildersQuery(baseOptions?: Apollo.QueryHookOptions<WildersQuery, WildersQueryVariables>) {
+export function useProductsQuery(baseOptions?: Apollo.QueryHookOptions<ProductsQuery, ProductsQueryVariables>) {
         const options = {...defaultOptions, ...baseOptions}
-        return Apollo.useQuery<WildersQuery, WildersQueryVariables>(WildersDocument, options);
+        return Apollo.useQuery<ProductsQuery, ProductsQueryVariables>(ProductsDocument, options);
       }
-export function useWildersLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<WildersQuery, WildersQueryVariables>) {
+export function useProductsLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<ProductsQuery, ProductsQueryVariables>) {
           const options = {...defaultOptions, ...baseOptions}
-          return Apollo.useLazyQuery<WildersQuery, WildersQueryVariables>(WildersDocument, options);
+          return Apollo.useLazyQuery<ProductsQuery, ProductsQueryVariables>(ProductsDocument, options);
         }
-export type WildersQueryHookResult = ReturnType<typeof useWildersQuery>;
-export type WildersLazyQueryHookResult = ReturnType<typeof useWildersLazyQuery>;
-export type WildersQueryResult = Apollo.QueryResult<WildersQuery, WildersQueryVariables>;
+export type ProductsQueryHookResult = ReturnType<typeof useProductsQuery>;
+export type ProductsLazyQueryHookResult = ReturnType<typeof useProductsLazyQuery>;
+export type ProductsQueryResult = Apollo.QueryResult<ProductsQuery, ProductsQueryVariables>;

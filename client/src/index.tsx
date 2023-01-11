@@ -6,7 +6,7 @@ import reportWebVitals from "./reportWebVitals";
 import { BrowserRouter } from "react-router-dom";
 import { MuiThemeProvider, createTheme } from "@material-ui/core/styles";
 import { ApolloProvider } from "@apollo/client";
-import apolloClient from "./services/apolloClient";
+import ApolloClient from "./gql/ApolloClient";
 
 const theme = createTheme({
   palette: {
@@ -23,7 +23,7 @@ root.render(
   <React.StrictMode>
     <BrowserRouter>
       <MuiThemeProvider theme={theme}>
-        <ApolloProvider client={apolloClient}>
+        <ApolloProvider client={ApolloClient}>
           <App />
         </ApolloProvider>
       </MuiThemeProvider>
